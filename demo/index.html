@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!--
+/****************************************************
+ *
+ *  Copyright 2012 DENIVIP Media.  All Rights Reserved.
+ *
+ *****************************************************
+ *
+ *  Created by - Vladimir Semenyuk vladimir@denivip.ru
+ *  Version 1.0.0
+ *
+ *****************************************************/
+-->
+<html>
+<head>
+    <meta content="text/html" charset="utf-8">
+
+    <title>WebSocket Chat Service</title>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="http://underscorejs.org/underscore-min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.0/mustache.min.js"></script>
+    <script src="js/chat.js"></script>
+    <script src="js/utils-date.js"></script>
+</head>
+
+<body>
+    <h1 class="title">WebSocket Chat Service</h1>
+
+    <div class="login">
+        You are logged as
+        <span class="login-nickname"></span>
+
+        <input id="nick-input">
+    </div>
+
+    <div class="chat">
+        <div class='menu'>
+            <span class="menu-item room" data-value="room1">Room 1</span>
+            <span class="menu-item room" data-value="room2">Room 2</span>
+            <span class="menu-item room" data-value="room3">Room 3</span>
+
+            <span class="users-count">Users: <span class="users-count__count">0</span></span>
+        </div>
+
+        <div class='chat-messages'>
+        </div>
+
+        <div class='footer'>
+            <input id="message">
+            <div id="submit">Send</div>
+        </div>
+
+        <div class="invis">
+            <div class="msg-tpl">
+                <div class="chat-message  {{#system}} chat-message_system{{/system}} {{#even}} chat-message_even{{/even}}">
+                {{#system}}
+                <span>{{nick}}</span> {{message}}
+                {{/system}}
+
+                {{^system}}
+                <div class="chat-time">{{time}}</div>
+                <div class="chat-name">{{name}}:</div>
+                <div class="chat-text">{{text}}</div>
+                {{/system}}
+            </div></div>
+
+        </div>
+
+    </div>
+
+    <div class="bottom">
+        <a href="http://www.denivip.ru/en">DENIVIP Media</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="http://blog.denivip.ru/?lang=en">Blog@DENIVIP</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="https://github.com/denivip/DChat">Fork It on Github</a>
+    </div>
+
+</body>
+</html>

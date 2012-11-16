@@ -1,0 +1,17 @@
+{
+    "name" : "chat",
+    "version" : "1.0.0",
+    "description" : "Chat Service",
+    "keywords": ["node", "chat", "websocket"],
+    "author": "Vladimir Semenyuk <vladimir@denivip.ru>",
+    "main": "./index.js",
+    "devDependencies": {
+        "mongodb":">=1.1.8",
+        "policyfile":"0.0.5",
+        "redis":">=0.7.1",
+        "underscore":">=1.4.1",
+        "websocket":">=1.0.7",
+        "hash_ring":">= 0.2.0"
+    },
+    "engines": { "node":  ">=0.8.x" }
+}
