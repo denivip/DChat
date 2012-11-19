@@ -1,7 +1,7 @@
 DChat
 =====
 
-Node.js chat based on websockets.
+Node.js chat service based on websockets.
 
 Features
 --------
@@ -43,5 +43,11 @@ Requirements
 Be careful!
 ------------
 
-All redis ':users_count' collections should be deleted before chat is started 
+All redis '*:users_count' collections should be deleted before chat is started 
 for correct user counting. 
+
+Suggestions and Feedback
+------------------------
+
+We will be very pleased if you'll send us some feedback, suggestions and feature-request.
+It surely will help this project to evolve. 
