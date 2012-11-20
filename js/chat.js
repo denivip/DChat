@@ -13,7 +13,7 @@
 
 var DChat = {
     DEFAULT_ROOM: 'room1',
-    SERVER_ADDR: 'ws://192.168.1.1:8080/',
+    SERVER_ADDR: 'ws://217.65.2.4:8080/',
     BLOCK_INTERVAL: 3000,
 
     STATE_READ_ONLY: 1,
