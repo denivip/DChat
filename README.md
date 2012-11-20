@@ -7,8 +7,8 @@ Features
 --------
 
 * Operates on both websocket and flashsocket client.
-* It starts several chat processes, equal the number of your CPU's.
-* All communications between chat instances ore provided via Redis pub/sub.
+* It starts several chat processes, equal the number of your CPUs.
+* All communications between chat instances are provided via Redis pub/sub.
 * Operates with several Redis instances via hashring.
 * Provide unlimited number of chat rooms.
 * Store message history, delete old messages after the time has passed.
@@ -18,27 +18,30 @@ Features
 Load Capabilities
 -----------------
 
-Max connection count is limited by ulimit and amount of memory.
+Max connection count is limited by 'ulimit' and amount of memory.
 Each connection you expect should be provided with 1 MB of RAM.
 
 Max number of clients is also limited by CPU.
-Small test on ubuntu VM with 4 CPUS (2.5 GHz Intel Core i5) showed,
+Small test on ubuntu VM with 4 CPUs (2.5 GHz Intel Core i5) showed,
 that 30.000 is ok. 
 
 Requirements
 ------------
 
-* Node.js (KO, thank you!)
-* Redis
+* [Node.js](http://nodejs.org/) >= 0.8.0 (KO, thank you!) 
+* [Redis](http://redis.io/)
 
-### Node.js modules
+Node.js Modules
+---------------
 
-* websocket >=1.0.7
-* redis >= 0.7.1
+* websocket >= 1.0.7
+* [redis](http://redis.io/) >= 0.7.1
 * hash_ring >= 0.2.0
-* policyfile >= 0.0.5
-* mongodb >= 1.1.8 (only for utility purposes)
-* underscore >=1.4.1
+* policyfile >= 0.0.5 (For flash policy)
+* [mongodb](http://www.mongodb.org/) >= 1.1.8 (Only for utility purposes. Chat uses ObjectID for the generation of connection IDs)
+* [underscore](http://underscorejs.org/) >= 1.4.1 (For cool object-operating methods)
+
+All Node.js modules should be installed by 'npm install'.
 
 Be careful!
 ------------
