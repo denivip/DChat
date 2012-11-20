@@ -1,74 +1,175 @@
 <!DOCTYPE html>
+<!--
+/****************************************************
+ *
+ *  Copyright 2012 DENIVIP Media.  All Rights Reserved.
+ *
+ *****************************************************
+ *
+ *  Created by - Vladimir Semenyuk vladimir@denivip.ru
+ *  Version 1.0.0
+ *
+ *****************************************************/
+-->
 <html>
+<head>
+    <meta content="text/html" charset="utf-8">
 
-  <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Dchat : Node.js chat based on websockets" />
+    <title>DChat</title>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 
-    <title>Dchat</title>
-  </head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="http://underscorejs.org/underscore-min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.0/mustache.min.js"></script>
+    <script src="js/chat.js"></script>
+    <script src="js/utils-date.js"></script>
+</head>
 
-  <body>
+<body  id="top">
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/denivip/DChat">View on GitHub</a>
+    <div class="anchors">
+        <a href="#top" class="anchor anchor_link">Top</a>
+        <a href="#chat" class="anchor anchor_link">Demo</a>
 
-          <h1 id="project_title">Dchat</h1>
-          <h2 id="project_tagline">Node.js chat based on websockets</h2>
+        <a href="https://github.com/denivip/DChat/tarball/master" class="anchor anchor_download">.TAR</a>
+        <a href="https://github.com/denivip/DChat/zipball/master" class="anchor anchor_download">.ZIP</a>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/denivip/DChat/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/denivip/DChat/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
+        <a href="https://github.com/denivip/DChat" class="anchor anchor_github">Fork Me</a>
     </div>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>Welcome to GitHub Pages.</h3>
+    <div class="header">
+        <div class="title">DChat</div>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
+        <div class="description">
+            Node.js chat service based on websockets. <br />
+            Fast. Highload. Cool.
+        </div>
     </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Dchat maintained by <a href="https://github.com/denivip">denivip</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
+    <div class="wrapper">
+
+        <div class="about" id="about">
+
+            <h2>
+                <a name="features" class="" href="#features"><span class="mini-icon mini-icon-link"></span></a>Features</h2>
+
+            <img src="images/arch.jpg" class="arch">
+
+            <ul>
+                <li>Operates on both websocket and flashsocket client.</li>
+                <li>It starts several chat processes, equal the number of your CPUs.</li>
+                <li>All communications between chat instances are provided via Redis pub/sub.</li>
+                <li>Operates with several Redis instances via hashring.</li>
+                <li>Provide unlimited number of chat rooms.</li>
+                <li>Store message history, delete old messages after the time has passed.</li>
+                <li>Provide users-per-room counting.</li>
+                <li>Read-only user mode for load reduction.</li>
+            </ul>
+
+
+
+            <h2>
+                <a name="load-capabilities" class="" href="#load-capabilities"><span class="mini-icon mini-icon-link"></span></a>Load Capabilities</h2>
+
+            <p>Max connection count is limited by 'ulimit' and amount of memory.
+                Each connection you expect should be provided with 1 MB of RAM.</p>
+
+            <p>Max number of clients is also limited by CPU.
+                Small test on ubuntu VM with 4 CPUs (2.5 GHz Intel Core i5) showed,
+                that 30.000 is ok. </p>
+
+            <h2>
+                <a name="requirements" class="" href="#requirements"><span class="mini-icon mini-icon-link"></span></a>Requirements</h2>
+
+            <ul>
+                <li>
+                    <a href="http://nodejs.org/">Node.js</a> &gt;= 0.8.0 (KO, thank you!) </li>
+                <li><a href="http://redis.io/">Redis</a></li>
+            </ul><h2>
+                <a name="nodejs-modules" class="" href="#nodejs-modules"><span class="mini-icon mini-icon-link"></span></a>Node.js Modules</h2>
+
+            <ul>
+                <li>websocket &gt;= 1.0.7</li>
+                <li>
+                    <a href="http://redis.io/">redis</a> &gt;= 0.7.1</li>
+                <li>hash_ring &gt;= 0.2.0</li>
+                <li>policyfile &gt;= 0.0.5 (For flash policy)</li>
+                <li>
+                    <a href="http://www.mongodb.org/">mongodb</a> &gt;= 1.1.8 (Only for utility purposes. Chat uses ObjectID for the generation of connection IDs)</li>
+                <li>
+                    <a href="http://underscorejs.org/">underscore</a> &gt;= 1.4.1 (For cool object-operating methods)</li>
+            </ul><p>All Node.js modules should be installed by 'npm install'.</p>
+
+            <h2>
+                <a name="be-careful" class="" href="#be-careful"><span class="mini-icon mini-icon-link"></span></a>Be careful!</h2>
+
+            <p>All redis '*:users_count' collections should be deleted before chat is started
+                for correct user counting. </p>
+
+            <h2>
+                <a name="suggestions-and-feedback" class="" href="#suggestions-and-feedback"><span class="mini-icon mini-icon-link"></span></a>Suggestions and Feedback</h2>
+
+            <p>We will be very pleased if you'll send us some feedback, suggestions and feature-request on our <a href="https://github.com/denivip/DChat">Github page</a>.
+                It surely will help this project to evolve. </p>
+
+            <h1 id="chat">Demo</h1>
+        </div>
+
+
+
+        <div class="chat" >
+
+            <div class="login">
+                You are logged as
+                <span class="login-nickname"></span>
+
+                <input id="nick-input">
+            </div>
+
+            <div class='menu'>
+                <span class="menu-item room" data-value="room1">Room 1</span>
+                <span class="menu-item room" data-value="room2">Room 2</span>
+                <span class="menu-item room" data-value="room3">Room 3</span>
+
+                <span class="users-count">Users: <span class="users-count__count">0</span></span>
+            </div>
+
+            <div class='chat-messages'>
+            </div>
+
+            <div class='footer'>
+                <input id="message">
+                <div id="submit">Send</div>
+            </div>
+
+            <div class="invis">
+                <div class="msg-tpl">
+                    <div class="chat-message  {{#system}} chat-message_system{{/system}} {{#even}} chat-message_even{{/even}}">
+                    {{#system}}
+                    <span>{{nick}}</span> {{message}}
+                    {{/system}}
+
+                    {{^system}}
+                    <div class="chat-time">{{time}}</div>
+                    <div class="chat-name">{{name}}:</div>
+                    <div class="chat-text">{{text}}</div>
+                    {{/system}}
+                </div></div>
+
+            </div>
+
+        </div>
+
+        <div class="bottom">
+            <a href="http://www.denivip.ru/en">DENIVIP Media</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="http://blog.denivip.ru/?lang=en">Blog@DENIVIP</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="https://github.com/denivip/DChat">Fork It on Github</a>
+        </div>
+
     </div>
 
-    
-
-  </body>
+</body>
 </html>
