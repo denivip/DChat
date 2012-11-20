@@ -373,7 +373,7 @@ var DChat = {
         var $field = $(e.target),
             text = $field.val();
 
-        if (e.which == 13) {
+        if ((e.which == 13) && text.length) {
             this._changeNickName(text);
         } else {
             if (text.length > this.MAX_NICKNAME_LENGTH) {
